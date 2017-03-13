@@ -186,5 +186,5 @@ function makeToolTipChart(data){
 	// Trick that allows me to set the style of the <text> tags within the pie chart without learning the underlying API
 	// a 0 ms delay is used due to the loading of the labels for the pie segments having a delay
 	// if executed without a delay then only the title will receive styling			
-	setTimeout(stylePieChart, 0);
+	setTimeout(stylePieChart, 1);
 }
