@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>USGS Water Science Centers Funding Map</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/colorbrewer.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/d3.js"></script>
+    <script src="http://d3js.org/queue.v1.min.js"></script>
+    <script src="js/colorbrewer.js"></script>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-right">
+                <a href="http://www.usgs.gov/" target="_blank"><img class="title-logo" src="images/usgs-logo.png" alt="USGS logo"></a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h1>Interactive USGS Science Centers Funding Map and Bar Charts</h1>
+                <h3>By <a href="https://github.com/jlant-usgs/" target="_blank">Jeremiah Lant</a> and Modified By <a href="https://github.com/tlbsoftware/" taget="_blank">Taylor Bryant</a></h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Description</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <p>
+                Interactive map and charts of total funding for USGS Water Science Centers by state during the year 2015. The data is provided by the <a href="http://www.usgs.gov/" target="_blank">United States Geological Survey (USGS)</a>. The choropleth map shows total funding by state (for the data available). The bar charts show the funding by state broken down into component parts of appropriated funds, reimbursable funds, and matching funds.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h2>Funding By State for Fiscal Year 2015 </h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h5>Select total funding for all mission areas or funding for each mission area:</h5>
+                <div class="btn-group" role="group" aria-label="...">
+                    <button type="button" class="btn btn-primary" id="btn-total">Total</button>
+                    <button type="button" class="btn btn-default" id="btn-water">Water</button>
+                    <button type="button" class="btn btn-default" id="btn-ecosystems">Ecosystems</button>
+                    <button type="button" class="btn btn-default" id="btn-em">Energy</button>
+                    <button type="button" class="btn btn-default" id="btn-hazards">Hazards</button>
+                    <button type="button" class="btn btn-default" id="btn-clu">Climate</button>
+                    <button type="button" class="btn btn-default" id="btn-css">Core</button>
+                    <button type="button" class="btn btn-default" id="btn-eh">Environmental</button>
+                    <button type="button" class="btn btn-default" id="btn-aei">Administration</button>
+                    <button type="button" class="btn btn-default" id="btn-misc">Misc</button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                        <tr class="active">
+                            <th style="width: 10%">State</th>
+                            <th style="width: 10%">Total</th>
+                            <th style="width: 10%">Appropriated</th>
+                            <th style="width: 10%">Reimbursable</th>
+                            <th style="width: 10%">Rank</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class = "success">
+                            <th id="state_name">Kentucky</th>    
+                            <th id="state_total">$12,323,117</th>
+                            <th id="state_appropriated">$4,095,750</th>
+                            <th id="state_reimbursable">$8,227,367</th>
+                            <th id="state_rank">2</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" id="legend">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" id="map">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h2>Bar Chart of Total Funding By State</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <label class="checkbox-sort"><input type="checkbox"> Sort total funding</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" id="bar-chart">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h2>Funding Components</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" id="bar-chart-stacked">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <br>
+        </div>
+    </div>
+    </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h2>Water Mission Area Funding Components</h2>
+            </div>
+        </div>
+    <div class="row">
+        <div class="col-md-12 text-center" id="pieChart">
+        </div>
+    </div>
+    <script src="js/map-funding.js"></script>
+    <script src="js/bar-funding.js"></script>
+    <script src="js/bar-funding-stacked.js"></script>
+    <script src="js/d3pie.js"></script>
+    <script src="js/pie-chart.js"></script>
+    <script src="js/tooltipPieChart2.js"></script>
+</body>
+</html>
